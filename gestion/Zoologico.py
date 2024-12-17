@@ -1,35 +1,29 @@
 class Zoologico():
 
     def __init__(self, nombre, ubicacion):
-        self._nombre_zoologico = nombre
-        self._ubicacion_zoologico = ubicacion
-        self._zonas_animales = []
+        self._nombre = nombre
+        self._ubicacion = ubicacion
+        self._zonas = []
     
-    def obtenerNombre(self):
-        return self._nombre_zoologico
-    
-    def modificarNombre(self, nuevoNombre):
-        self._nombre_zoologico = nuevoNombre
-    
-    def obtenerUbicacion(self):
-        return self._ubicacion_zoologico
-    
-    def cambiarUbicacion(self, nuevaUbicacion):
-        self._ubicacion_zoologico = nuevaUbicacion
+    def agregarZonas(self, nuevaZona):
+        self._zonas.append(nuevaZona)
 
-    def anadirZona(self, zona):
-        self._zonas_animales.append(zona)
+    def getZonas(self):
+        return self._zonas
 
-    def obtenerZonas(self):
-        return self._zonas_animales
-    
-    def obtenerPrimeraZona(self):
-        if self._zonas_animales:
-            return [self._zonas_animales[0]]
+    def getZona(self):
+        if self._zonas:
+            return [self._zonas[0]]
         return []
+
+    def getNombre(self):
+        return self._nombre
     
-    def contarAnimales(self):
-        total_animales = 0
-        for zona in self._zonas_animales:
-            total_animales += zona.cantidadAnimales()
-        return total_animales
+    def setNombre(self, nuevoNombre):
+        self._nombre = nuevoNombre
+    
+    def getUbicacion(self):
+        return self._ubicacion
+    
+    def setUbicacion(self, nuevaUbicacion):
+        self._ubicacion = nuevaUbicacion

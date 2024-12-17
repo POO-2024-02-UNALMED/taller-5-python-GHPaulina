@@ -2,49 +2,58 @@ from .animal import Animal
 
 class Reptil(Animal):
 
-    cantidad_iguanas = 0
-    cantidad_serpientes = 0
-    _registro = []
+    # Variables de clase para contar iguanas y serpientes
+    iguanas = 0
+    serpientes = 0
+    _listado = []
     
-    def __init__(self, nombre, edad, habitat, genero, color_escamas, longitud_cola, zona = None):
+    def __init__(self, nombre, edad, habitat, genero, colorEscamas, largoCola, zona = None):
+        # Inicialización de los atributos heredados de la clase Animal y los nuevos atributos específicos de Reptil
         super().setNombre(nombre)
         super().setEdad(edad)
         super().setHabitat(habitat)
         super().setGenero(genero)
         super().setZona(zona)
-        self._color_escamas = color_escamas
-        self._longitud_cola = longitud_cola
+        self._colorEscamas = colorEscamas
+        self._largoCola = largoCola
 
-    def obtenerColorEscamas(self):
-        return self._color_escamas
+    # Métodos para obtener y establecer el atributo "colorEscamas"
+    def getColorEscamas(self):
+        return self._colorEscamas
     
-    def modificarColorEscamas(self, color_escamas):
-        self._color_escamas = color_escamas
+    def setColorEscamas(self, colorEscamas):
+        self._colorEscamas = colorEscamas
     
-    def obtenerLongitudCola(self):
-        return self._longitud_cola
+    # Métodos para obtener y establecer el atributo "largoCola"
+    def getLargoCola(self):
+        return self._largoCola
     
-    def modificarLongitudCola(self, longitud_cola):
-        self._longitud_cola = longitud_cola
+    def setLargoCola(self, largoCola):
+        self._largoCola = largoCola
 
+    # Método de movimiento para los reptiles
     @classmethod
-    def tipoMovimiento(cls):
+    def movimiento(cls):
         return "reptar"
     
+    # Método para obtener el listado de todos los reptiles
     @classmethod
-    def obtenerRegistro(cls):
-        return cls._registro
+    def getListado(cls):
+        return cls._listado
     
+    # Método que devuelve la cantidad total de reptiles en el listado
     @classmethod
-    def contarReptiles(cls):
-        return len(Reptil.obtenerRegistro())
+    def cantidadReptiles(cls):
+        return len(Reptil.getListado())
     
+    # Método para crear una iguana y agregarla al listado
     @classmethod
     def crearIguana(cls, nombre, edad, genero, zona = None):
-        Reptil._registro.append(Reptil(nombre, edad, "humedal", genero, "verde", 3, zona))
-        Reptil.cantidad_iguanas += 1
+        Reptil._listado.append(Reptil(nombre, edad, "humedal", genero, "verde", 3, zona))
+        Reptil.iguanas += 1
 
+    # Método para crear una serpiente y agregarla al listado
     @classmethod
     def crearSerpiente(cls, nombre, edad, genero, zona = None):
-        Reptil._registro.append(Reptil(nombre, edad, "jungla", genero, "blanco", 1, zona))
-        Reptil.cantidad_serpientes += 1
+        Reptil._listado.append(Reptil(nombre, edad, "jungla", genero, "blanco", 1, zona))
+        Reptil.serpientes += 1

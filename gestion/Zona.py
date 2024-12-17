@@ -5,6 +5,13 @@ class Zona():
         self._zoo = zoo
         self._animales = []
 
+    def cantidadAnimales(self):
+        return len(self._animales)
+
+    def agregarAnimales(self, nuevoAnimal):
+        if nuevoAnimal not in self._animales:
+            self._animales.append(nuevoAnimal)
+
     def getNombre(self):
         return self._nombre
 
@@ -19,10 +26,3 @@ class Zona():
 
     def getAnimales(self):  
         return self._animales
-
-    def agregarAnimales(self, nuevoAnimal):
-        if nuevoAnimal not in self._animales:
-            self._animales.append(nuevoAnimal)
-
-    def cantidadAnimales(self):
-        return len(self._animales)

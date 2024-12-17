@@ -2,49 +2,58 @@ from .animal import Animal
 
 class Pez(Animal):
 
-    cantidad_salmones = 0
-    cantidad_bacalaos = 0
-    _registro = []
+    # Variables de clase para contar el número de cada tipo de pez
+    salmones = 0
+    bacalaos = 0
+    _listado = []
     
-    def __init__(self, nombre, edad, habitat, genero, color_escamas, numero_aletas, zona = None):
+    def __init__(self, nombre, edad, habitat, genero, colorEscamas, cantidadAletas, zona = None):
+        # Inicialización de los atributos heredados y propios de Pez
         super().setNombre(nombre)
         super().setEdad(edad)
         super().setHabitat(habitat)
         super().setGenero(genero)
         super().setZona(zona)
-        self._color_escamas = color_escamas
-        self._numero_aletas = numero_aletas
+        self._colorEscamas = colorEscamas
+        self._cantidadAletas = cantidadAletas
     
-    def obtenerColorEscamas(self):
-        return self._color_escamas
+    # Métodos para obtener y establecer el atributo "colorEscamas"
+    def getColorEscamas(self):
+        return self._colorEscamas
     
-    def modificarColorEscamas(self, color_escamas):
-        self._color_escamas = color_escamas
+    def setColorEscamas(self, colorEscamas):
+        self._colorEscamas = colorEscamas
 
-    def obtenerCantidadAletas(self):
-        return self._numero_aletas
+    # Métodos para obtener y establecer el atributo "cantidadAletas"
+    def getCantidadAletas(self):
+        return self._cantidadAletas
     
-    def modificarCantidadAletas(self, cantidad_aletas):
-        self._numero_aletas = cantidad_aletas
+    def setCantidadAletas(self, cantidadAletas):
+        self._cantidadAletas = cantidadAletas
 
+    # Método de movimiento para los peces
     @classmethod
-    def tipoMovimiento(cls):
+    def movimiento(cls):
         return "nadar"
     
+    # Método para obtener el listado de todos los peces
     @classmethod
-    def obtenerRegistro(cls):
-        return cls._registro
+    def getListado(cls):
+        return cls._listado
     
+    # Método que devuelve la cantidad total de peces en el listado
     @classmethod
-    def contarPeces(cls):
-        return len(Pez.obtenerRegistro())
+    def cantidadPeces(cls):
+        return len(Pez.getListado())
     
+    # Método para crear un salmón y agregarlo al listado
     @classmethod
     def crearSalmon(cls, nombre, edad, genero, zona = None):
-        Pez._registro.append(Pez(nombre, edad, "océano", genero, "rojo", 6, zona))
-        Pez.cantidad_salmones += 1
+        Pez._listado.append(Pez(nombre, edad, "ocenao", genero, "rojo", 6, zona))
+        Pez.salmones += 1
     
+    # Método para crear un bacalao y agregarlo al listado
     @classmethod
     def crearBacalao(cls, nombre, edad, genero, zona = None):
-        Pez._registro.append(Pez(nombre, edad, "océano", genero, "gris", 6, zona))
-        Pez.cantidad_bacalaos += 1
+        Pez._listado.append(Pez(nombre, edad, "ocenao", genero, "gris", 6, zona))
+        Pez.bacalaos += 1

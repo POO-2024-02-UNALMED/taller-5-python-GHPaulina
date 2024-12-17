@@ -2,45 +2,53 @@ from .animal import Animal
 
 class Mamifero(Animal):
 
-    cantidad_caballos = 0
-    cantidad_leones = 0
-    _registro = []
+    # Variables de clase para contar mamíferos específicos
+    caballos = 0
+    leones = 0
+    _listado = []
     
-    def __init__(self, nombre, edad, habitat, genero, tiene_pelaje, numero_patas, zona = None):
+    def __init__(self, nombre, edad, habitat, genero, pelaje, patas, zona = None):
+        # Inicialización de los atributos heredados y propios de Mamifero
         super().setNombre(nombre)
         super().setEdad(edad)
         super().setHabitat(habitat)
         super().setGenero(genero)
         super().setZona(zona)
-        self._tiene_pelaje = tiene_pelaje
-        self._numero_patas = numero_patas
+        self._pelaje = pelaje
+        self._patas = patas
     
-    def obtenerPatas(self):
-        return self._numero_patas
+    # Métodos para obtener y establecer el atributo "patas"
+    def getPatas(self):
+        return self._patas
     
-    def modificarPatas(self, patas):
-        self._numero_patas = patas
+    def setPatas(self, patas):
+        self._patas = patas
 
-    def tienePelaje(self):
-        return self._tiene_pelaje
+    # Métodos para obtener y establecer el atributo "pelaje"
+    def isPelaje(self):
+        return self._pelaje
     
-    def cambiarPelaje(self, pelaje):
-        self._tiene_pelaje = pelaje
+    def setPelaje(self, pelaje):
+        self._pelaje = pelaje
 
+    # Método para obtener el listado de mamíferos
     @classmethod
-    def obtenerRegistro(cls):
-        return cls._registro
+    def getListado(cls):
+        return cls._listado
     
+    # Método que devuelve la cantidad total de mamíferos en el listado
     @classmethod
-    def contarMamiferos(cls):
-        return len(Mamifero.obtenerRegistro())
+    def cantidadMamiferos(cls):
+        return len(Mamifero.getListado())
     
+    # Método para crear un caballo y agregarlo al listado
     @classmethod
     def crearCaballo(cls, nombre, edad, genero, zona = None):
-        Mamifero._registro.append(Mamifero(nombre, edad, "pradera", genero, True, 4, zona))
-        Mamifero.cantidad_caballos += 1
+        Mamifero._listado.append(Mamifero(nombre, edad, "pradera", genero, True, 4, zona))
+        Mamifero.caballos += 1
 
+    # Método para crear un león y agregarlo al listado
     @classmethod
     def crearLeon(cls, nombre, edad, genero, zona = None):
-        Mamifero._registro.append(Mamifero(nombre, edad, "selva", genero, True, 4, zona))
-        Mamifero.cantidad_leones += 1
+        Mamifero._listado.append(Mamifero(nombre, edad, "selva", genero, True, 4, zona))
+        Mamifero.leones += 1
