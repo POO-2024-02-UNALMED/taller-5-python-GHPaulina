@@ -1,3 +1,4 @@
+
 class Zona():
     
     def __init__(self, nombre, zoo=None):
@@ -26,4 +27,3 @@ class Zona():
 
     def getAnimales(self):
         return self._animales  # Devuelve la lista de animales de la zona
-
