@@ -29,4 +29,8 @@ class Zoologico():
         self._ubicacion = nuevaUbicacion
 
     def cantidadTotalAnimales(self):
-        return len(self.animales)
+        cantidadTotalAnimales = 0
+        for i in range(len(self._zonas)):
+            cantidadTotalAnimales += self.getZonas()[i].cantidadAnimales()
+        return cantidadTotalAnimales
+    
