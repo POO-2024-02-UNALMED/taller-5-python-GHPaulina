@@ -27,3 +27,6 @@ class Zoologico():
     
     def setUbicacion(self, nuevaUbicacion):
         self._ubicacion = nuevaUbicacion
+
+    def cantidadTotalAnimales(self):
+        return len(self.animales)
