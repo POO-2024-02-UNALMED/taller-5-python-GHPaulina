@@ -1,48 +1,46 @@
-
-from zooAnimales.animal import Animal
+from .animal import Animal
 
 class Mamifero(Animal):
-    listado = []
-    caballos = 0
-    leones = 0
 
-    def __init__(self, nombre=None, edad=0, habitat=None, genero=None, pelaje=False, patas=0):
-        super().__init__(nombre, edad, habitat, genero)
-        self.pelaje = pelaje
-        self.patas = patas
-        Mamifero.listado.append(self)
+    cantidad_caballos = 0
+    cantidad_leones = 0
+    _registro = []
+    
+    def __init__(self, nombre, edad, habitat, genero, tiene_pelaje, numero_patas, zona = None):
+        super().setNombre(nombre)
+        super().setEdad(edad)
+        super().setHabitat(habitat)
+        super().setGenero(genero)
+        super().setZona(zona)
+        self._tiene_pelaje = tiene_pelaje
+        self._numero_patas = numero_patas
+    
+    def obtenerPatas(self):
+        return self._numero_patas
+    
+    def modificarPatas(self, patas):
+        self._numero_patas = patas
+
+    def tienePelaje(self):
+        return self._tiene_pelaje
+    
+    def cambiarPelaje(self, pelaje):
+        self._tiene_pelaje = pelaje
 
     @classmethod
-    def set_listado(cls, listado):
-        cls.listado = listado
+    def obtenerRegistro(cls):
+        return cls._registro
+    
+    @classmethod
+    def contarMamiferos(cls):
+        return len(Mamifero.obtenerRegistro())
+    
+    @classmethod
+    def crearCaballo(cls, nombre, edad, genero, zona = None):
+        Mamifero._registro.append(Mamifero(nombre, edad, "pradera", genero, True, 4, zona))
+        Mamifero.cantidad_caballos += 1
 
     @classmethod
-    def get_listado(cls):
-        return cls.listado
-
-    def set_pelaje(self, pelaje):
-        self.pelaje = pelaje
-
-    def is_pelaje(self):
-        return self.pelaje
-
-    def set_patas(self, patas):
-        self.patas = patas
-
-    def get_patas(self):
-        return self.patas
-
-    def cantidad_mamiferos(self):
-        return len(Mamifero.listado)
-
-    @staticmethod
-    def crearCaballo(nombre, edad, genero):
-        mamifero = Mamifero(nombre, edad, "pradera", genero, True, 4)
-        Mamifero.caballos += 1
-        return mamifero
-
-    @staticmethod
-    def crearLeon(nombre, edad, genero):
-        mamifero = Mamifero(nombre, edad, "selva", genero, True, 4)
-        Mamifero.leones += 1
-        return mamifero
+    def crearLeon(cls, nombre, edad, genero, zona = None):
+        Mamifero._registro.append(Mamifero(nombre, edad, "selva", genero, True, 4, zona))
+        Mamifero.cantidad_leones += 1

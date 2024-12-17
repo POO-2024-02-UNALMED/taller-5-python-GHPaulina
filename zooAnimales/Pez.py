@@ -1,49 +1,50 @@
-from zooAnimales.animal import Animal
+from .animal import Animal
+
 class Pez(Animal):
-    listado = []
-    salmones = 0
-    bacalaos = 0
 
-    def __init__(self, nombre=None, edad=0, habitat=None, genero=None, color_escamas=None, cantidad_aletas=0):
-        super().__init__(nombre, edad, habitat, genero)
-        self.color_escamas = color_escamas
-        self.cantidad_aletas = cantidad_aletas
-        Pez.listado.append(self)
+    cantidad_salmones = 0
+    cantidad_bacalaos = 0
+    _registro = []
+    
+    def __init__(self, nombre, edad, habitat, genero, color_escamas, numero_aletas, zona = None):
+        super().setNombre(nombre)
+        super().setEdad(edad)
+        super().setHabitat(habitat)
+        super().setGenero(genero)
+        super().setZona(zona)
+        self._color_escamas = color_escamas
+        self._numero_aletas = numero_aletas
+    
+    def obtenerColorEscamas(self):
+        return self._color_escamas
+    
+    def modificarColorEscamas(self, color_escamas):
+        self._color_escamas = color_escamas
+
+    def obtenerCantidadAletas(self):
+        return self._numero_aletas
+    
+    def modificarCantidadAletas(self, cantidad_aletas):
+        self._numero_aletas = cantidad_aletas
 
     @classmethod
-    def set_listado(cls, listado):
-        cls.listado = listado
-
-    @classmethod
-    def get_listado(cls):
-        return cls.listado
-
-    def set_color_escamas(self, color_escamas):
-        self.color_escamas = color_escamas
-
-    def get_color_escamas(self):
-        return self.color_escamas
-
-    def set_cantidad_aletas(self, cantidad_aletas):
-        self.cantidad_aletas = cantidad_aletas
-
-    def get_cantidad_aletas(self):
-        return self.cantidad_aletas
-
-    def cantidad_peces(self):
-        return len(Pez.listado)
-
-    def movimiento(self):
+    def tipoMovimiento(cls):
         return "nadar"
-
-    @staticmethod
-    def crearSalmon(nombre, edad, genero):
-        pez = Pez(nombre, edad, "oceano", genero, "rojo", 6)
-        Pez.salmones += 1
-        return pez
-
-    @staticmethod
-    def crearBacalao(nombre, edad, genero):
-        pez = Pez(nombre, edad, "oceano", genero, "gris", 6)
-        Pez.bacalaos += 1
-        return pez
+    
+    @classmethod
+    def obtenerRegistro(cls):
+        return cls._registro
+    
+    @classmethod
+    def contarPeces(cls):
+        return len(Pez.obtenerRegistro())
+    
+    @classmethod
+    def crearSalmon(cls, nombre, edad, genero, zona = None):
+        Pez._registro.append(Pez(nombre, edad, "océano", genero, "rojo", 6, zona))
+        Pez.cantidad_salmones += 1
+    
+    @classmethod
+    def crearBacalao(cls, nombre, edad, genero, zona = None):
+        Pez._registro.append(Pez(nombre, edad, "océano", genero, "gris", 6, zona))
+        Pez.cantidad_bacalaos += 1

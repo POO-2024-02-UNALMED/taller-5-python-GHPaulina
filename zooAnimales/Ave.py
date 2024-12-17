@@ -1,42 +1,43 @@
-from zooAnimales.animal import Animal
+from .animal import Animal
+
 class Ave(Animal):
-    listado = []
-    halcones = 0
-    aguilas = 0
+    
+    cantidad_halcones = 0
+    cantidad_aguilas = 0
+    _registro = []
 
-    def __init__(self, nombre=None, edad=0, habitat=None, genero=None, color_plumas=None):
-        super().__init__(nombre, edad, habitat, genero)
-        self.color_plumas = color_plumas
-        Ave.listado.append(self)
-
+    def __init__(self, nombre, edad, habitat, genero, color_plumas, zona = None):
+        super().setNombre(nombre)
+        super().setEdad(edad)
+        super().setHabitat(habitat)
+        super().setGenero(genero)
+        super().setZona(zona)
+        self._color_plumas = color_plumas
+    
+    def obtenerColorPlumas(self):
+        return self._color_plumas
+    
+    def modificarColorPlumas(self, color_plumas):
+        self._color_plumas = color_plumas
+    
     @classmethod
-    def set_listado(cls, listado):
-        cls.listado = listado
-
-    @classmethod
-    def get_listado(cls):
-        return cls.listado
-
-    def set_color_plumas(self, color_plumas):
-        self.color_plumas = color_plumas
-
-    def get_color_plumas(self):
-        return self.color_plumas
-
-    def cantidad_aves(self):
-        return len(Ave.listado)
-
-    def movimiento(self):
+    def tipoMovimiento(cls):
         return "volar"
+    
+    @classmethod
+    def obtenerRegistro(cls):
+        return cls._registro
+    
+    @classmethod
+    def contarAves(cls):
+        return len(Ave.obtenerRegistro())
+    
+    @classmethod
+    def crearHalcon(cls, nombre, edad, genero, zona = None):
+        Ave._registro.append(Ave(nombre, edad, "montañas", genero, "café glorioso", zona))
+        Ave.cantidad_halcones += 1
 
-    @staticmethod
-    def crearHalcon(nombre, edad, genero):
-        ave = Ave(nombre, edad, "montanas", genero, "cafe glorioso")
-        Ave.halcones += 1
-        return ave
-
-    @staticmethod
-    def crearAguila(nombre, edad, genero):
-        ave = Ave(nombre, edad, "montanas", genero, "blanco y amarillo")
-        Ave.aguilas += 1
-        return ave
+    @classmethod
+    def crearAguila(cls, nombre, edad, genero, zona = None):
+        Ave._registro.append(Ave(nombre, edad, "montañas", genero, "blanco y amarillo", zona))
+        Ave.cantidad_aguilas += 1

@@ -1,42 +1,50 @@
-from zooAnimales.animal import Animal
+from .animal import Animal
+
 class Anfibio(Animal):
-    listado = []
-    ranas = 0
-    salamandras = 0
 
-    def __init__(self, nombre=None, edad=0, habitat=None, genero=None, color_piel=None):
-        super().__init__(nombre, edad, habitat, genero)
-        self.color_piel = color_piel
-        Anfibio.listado.append(self)
+    cantidad_ranas = 0
+    cantidad_salamandras = 0
+    _registro = []
+    
+    def __init__(self, nombre, edad, habitat, genero, color_piel, es_venenoso, zona = None):
+        super().setNombre(nombre)
+        super().setEdad(edad)
+        super().setHabitat(habitat)
+        super().setGenero(genero)
+        super().setZona(zona)
+        self._color_piel = color_piel
+        self._es_venenoso = es_venenoso
 
+    def obtenerColorPiel(self):
+        return self._color_piel
+    
+    def modificarColorPiel(self, color_piel):
+        self._color_piel = color_piel
+    
+    def esVenenoso(self):
+        return self._es_venenoso
+    
+    def cambiarVenenoso(self, es_venenoso):
+        self._es_venenoso = es_venenoso
+    
     @classmethod
-    def set_listado(cls, listado):
-        cls.listado = listado
-
-    @classmethod
-    def get_listado(cls):
-        return cls.listado
-
-    def set_color_piel(self, color_piel):
-        self.color_piel = color_piel
-
-    def get_color_piel(self):
-        return self.color_piel
-
-    def cantidad_anfibios(self):
-        return len(Anfibio.listado)
-
-    def movimiento(self):
+    def tipoMovimiento(cls):
         return "saltar"
-
-    @staticmethod
-    def crearRana(nombre, edad, genero):
-        anfibio = Anfibio(nombre, edad, "humedal", genero, "verde")
-        Anfibio.ranas += 1
-        return anfibio
-
-    @staticmethod
-    def crearSalamandra(nombre, edad, genero):
-        anfibio = Anfibio(nombre, edad, "bosque", genero, "amarillo")
-        Anfibio.salamandras += 1
-        return anfibio
+    
+    @classmethod
+    def obtenerRegistro(cls):
+        return cls._registro
+    
+    @classmethod
+    def contarAnfibios(cls):
+        return len(Anfibio.obtenerRegistro())
+    
+    @classmethod
+    def crearRana(cls, nombre, edad, genero, zona = None):
+        Anfibio._registro.append(Anfibio(nombre, edad, "selva", genero, "rojo", True, zona))
+        Anfibio.cantidad_ranas += 1
+    
+    @classmethod
+    def crearSalamandra(cls, nombre, edad, genero, zona = None):
+        Anfibio._registro.append(Anfibio(nombre, edad, "selva", genero, "negro y amarillo", False, zona))
+        Anfibio.cantidad_salamandras += 1
